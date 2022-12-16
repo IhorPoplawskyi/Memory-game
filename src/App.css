@@ -1,32 +1,25 @@
 .container {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .App {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-}
-
-.item {
-  border: 1px solid green;
-  box-sizing: border-box;
+  width: 45vw;
+  height: 45vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
+  flex-wrap: wrap;
 }
 
 .flip-card {
+  width: 24%;
+  height: 24%;
   background-color: transparent;
-  width: 200px;
-  height: 200px;
   border: 1px solid blue;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  margin: 1px;
+  box-sizing: border-box;
 }
 
 /* This container is needed to position the front and back side */
@@ -61,7 +54,14 @@
 
 /* Style the back side */
 .flip-card-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
+}
+
+.flip-card-back img {
+  max-width: 100%;
 }

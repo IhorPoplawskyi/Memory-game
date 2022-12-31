@@ -1,35 +1,51 @@
 .container {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  background-color: rgb(240, 170, 18);
+  padding: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.timeBlock {
+  display: flex;
+}
+
 .App {
-  width: 45vw;
-  height: 45vw;
+  width: 35vw;
+  height: 35vw;
   display: flex;
   flex-wrap: wrap;
 }
 
 .flip-card {
-  width: 24%;
-  height: 24%;
+  width: calc(25% - 2px);
+  height: calc(25% - 2px);
   background-color: transparent;
-  border: 1px solid blue;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  border: 1px solid black;
+  perspective: 1000px;
   margin: 1px;
   box-sizing: border-box;
 }
 
-/* This container is needed to position the front and back side */
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
+  transition: transform 0.7s;
   transform-style: preserve-3d;
+  box-sizing: border-box;
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -42,14 +58,18 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
+
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: transparent;
+  background-color: rgb(172, 245, 229);
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Style the back side */
@@ -57,11 +77,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: dodgerblue;
+  background-color: rgb(240, 170, 18);
   color: white;
   transform: rotateY(180deg);
 }
 
 .flip-card-back img {
+  max-width: 100%;
+}
+
+.flip-card-front img {
   max-width: 100%;
 }

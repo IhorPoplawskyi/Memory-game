@@ -41,7 +41,7 @@ const App: React.FC = () => {
         return el;
       })])
       setClicked([])
-    }, 1000)
+    }, 1500)
     setTimers(prev => [...prev, timeout])
   }
   useEffect(() => {

@@ -19,8 +19,12 @@ const App: React.FC = () => {
   const [minutes, setMinutes] = useState<number>(0);
   const [live, setLive] = useState<boolean>(false);
   const [clicks, setClicks] = useState<number>(0);
-  
+  const [showWin, setShowWin] = useState<boolean>(false);
+
   const clickHandler = (clickedItem: IClicked) => {
+    if (!live) {
+      setLive(true)
+    }
     setClicks(counter => counter + 1)
     setClicked(prev => [...prev, clickedItem])
     setState(prev => [...prev.map((el) => {
@@ -47,19 +51,26 @@ const App: React.FC = () => {
         if (el.id === clicked[0].id || el.id === clicked[1].id) {
           el.disabled = true;
         }
-        return el; 
+        return el;
       }))
       clearTimeout(timers.at(-1))
       clearTimeout(timers.at(-2))
     } else if (clicked.length === 2 && clicked[0].id !== clicked[1].id && clicked[0].name !== clicked[1].name) {
-      setClicked(prevState => prevState.splice(0,1))
+      setClicked(prevState => prevState.splice(0, 1))
     } else if (clicked.length === 2 && clicked[0].id === clicked[1].id) {
       setClicked(prevState => prevState.splice(0, 1));
     }
   }, [clicked])
-  
+
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval> = setInterval(() => {});
+    if (state.every(el => el.disabled === true)) {
+      setLive(false);
+      setTimeout(() => setShowWin(true), 700)
+    }
+  }, [state])
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval> = setInterval(() => { });
     if (live) {
       interval = setInterval(() => {
         setMiliseconds(time => time + 1)
@@ -72,21 +83,34 @@ const App: React.FC = () => {
           setMinutes(minutes => minutes + 1)
         }
       }, 10)
-    } 
+    }
     if (!live) {
       clearInterval(interval)
     }
     return () => clearInterval(interval)
   }, [live, miliseconds])
-  console.log(seconds)
 
   return (
     <div className='container'>
       <div className='infoBlock'>
-        <div className='timeBlock'>Time: 
-        {minutes < 10 ? <div>{`0${minutes}:`}</div> : <div>{`${minutes}:`}</div>} 
-        {seconds < 10 ? <div>{`0${seconds}:`}</div> : <div>{`${seconds}:`}</div>}
-        {miliseconds < 10 ? <div>{`0${miliseconds}`}</div> : <div>{`${miliseconds}`}</div>} 
+        {showWin && <div className='congrats'>
+          <button onClick={() => setShowWin(false)} className='closeResBtn'>close</button>
+          You win!
+          <div className='congratsDiv'>Time:
+            {minutes < 10 ? <div>{`0${minutes}:`}</div> : <div>{`${minutes}:`}</div>}
+            {seconds < 10 ? <div>{`0${seconds}:`}</div> : <div>{`${seconds}:`}</div>}
+            {miliseconds < 10 ? <div>{`0${miliseconds}`}</div> : <div>{`${miliseconds}`}</div>}
+          </div>
+          <div>
+            Clicks: {clicks}
+          </div>
+          <img className='uncle' alt='uncle' src='../icons/molitva.gif'/>
+        </div>
+        }
+        <div className='timeBlock'>Time:
+          {minutes < 10 ? <div>{`0${minutes}:`}</div> : <div>{`${minutes}:`}</div>}
+          {seconds < 10 ? <div>{`0${seconds}:`}</div> : <div>{`${seconds}:`}</div>}
+          {miliseconds < 10 ? <div>{`0${miliseconds}`}</div> : <div>{`${miliseconds}`}</div>}
         </div>
         <div>Clicks: {clicks}</div>
       </div>
@@ -106,7 +130,6 @@ const App: React.FC = () => {
           )
         })}
       </div>
-      <button onClick={() => setLive(live => !live)}>Start game</button>
     </div>
   );
 }

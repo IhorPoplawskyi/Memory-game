@@ -126,3 +126,66 @@
   align-items: center;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+  .App {
+    width: 95vw;
+    height: 95vw;
+  }
+  .infoBlock {
+    width: 90%;
+  }
+  .congrats {
+    width: 95vw;
+    font-size: 36px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .App {
+    width: 95vw;
+    height: 95vw;
+  }
+  .infoBlock {
+    width: 80%;
+  }
+  .congrats {
+    width: 95vw;
+    font-size: 42px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .App {
+    width: 65vw;
+    height: 65vw;
+  }
+  .infoBlock {
+    width: 50%;
+  }
+  .congrats {
+    width: 65vw;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .App {
+    width: 45vw;
+    height: 45vw;
+  }
+  .infoBlock {
+    width: 40%;
+  }
+  .congrats {
+    width: 65vw;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .App {
+    width: 40vw;
+    height: 40vw;
+  }
+  .infoBlock {
+    width: 30%;
+  }
+  .congrats {
+    width: 40vw;
+  }
+}
